@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 
 using namespace std;
 
@@ -13,49 +14,43 @@ struct KnightResult {
 };
 
 void print(int matrix[SIZE][SIZE]) {
+	system("cls");
+
 	for (int i = 0; i < SIZE; i++) {
-		for (int j = 0; j < SIZE; j++) {
-			cout << matrix[i][j] << "  ";
-		}
+		for (int j = 0; j < SIZE; j++)
+			cout << setw(4) << matrix[i][j] << "|";
 
 		cout << endl;
+
+		if (i != SIZE - 1) {
+			for (int k = 0; k < SIZE; k++)
+				cout << "  ---";
+			cout << endl;
+		}
 	}
 }
 
 bool trial_error(int board[SIZE][SIZE], int x, int y, int pos) {
-	//KnightResult result;
 
-	try {
-		if (pos == 64) {
-			return true;
+	if (pos == 64)
+		return true;
+
+	for (int i = 0; i < SIZE; i++) {
+		int xNext = x + xMove[i];
+		int yNext = y + yMove[i];
+
+		if ((x >= 0) && (x < SIZE) && (y >= 0) && (y < SIZE) && (board[xNext][yNext] == 0)) {
+			board[xNext][yNext] = pos;
+
+			if (trial_error(board, xNext, yNext, pos + 1))
+				return true;
+
+			// Caso seja falso, tente a nova posição, caso chegue a todas e não consigue
+			// Faça o backtracking
+			board[xNext][yNext] = 0;
 		}
-
-		
-		for (int i = 0; i < SIZE; i++) {
-			int xNext = x + xMove[i];
-			int yNext = y + yMove[i];
-
-			if ((x >= 0) && (x < SIZE) && (y >= 0) && (y < SIZE) && (board[xNext][yNext] == 0)) {
-				board[xNext][yNext] = pos;
-
-
-				if (trial_error(board, xNext, yNext, pos + 1))
-					return true;
-
-				// Caso seja falso, tente a nova posição, caso chegue a todas e não consigue
-				// Faça o backtracking
-				board[xNext][yNext] = 0;
-
-
-
-			}
-		}
-		return false;
-
 	}
-	catch (exception e) 
-	{
-	}
+	return false;
 }
 
 
@@ -66,10 +61,11 @@ int main()
 	KnightResult result1;
 	int board[SIZE][SIZE];
 	fill(*board, *board + 64, 0);
-	trial_error(board, 0, 0, 1);
 
-	system("cls");
-	print(board);
+	if (trial_error(board, 0, 0, 1))
+		print(board);
+	else
+		cout << "Não encontrou solução";
 
 	return 0;
 }
