@@ -11,8 +11,6 @@ KnightBruteForce::KnightBruteForce() {
 }
 
 void KnightBruteForce::printResult() {
-	system("cls");
-
 	for (int i = 0; i < Constants::SIZE; i++) {
 		for (int j = 0; j < Constants::SIZE; j++) {
 			std::cout << std::setw(4) << this->board[i][j] << "|";
@@ -31,8 +29,8 @@ void KnightBruteForce::printResult() {
 	}
 
 	std::cout << std::endl << std::endl <<
-		"Movimentações realizadas: " << this->moves << std::endl << 
-		"Tempo de execução (ms): " << (this->endTime - this->startTime) << std::endl;
+		"Movimentacoes realizadas: " << this->moves << std::endl <<
+		"Tempo de execucao (ms): " << (this->endTime - this->startTime) << std::endl;
 }
 
 bool KnightBruteForce::run(int xStart, int yStart) {

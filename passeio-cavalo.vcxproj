@@ -139,13 +139,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\KnightWarnsdorff\KnightWarnsdorff.cpp" />
     <ClCompile Include="src\KnightBruteForce\KnightBruteForce.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="src\passeio-cavalo.cpp">
+    <ClCompile Include="Origem.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\KnightWarnsdorff\KnightWarnsdorff.h" />
     <ClInclude Include="src\Constants.h" />
     <ClInclude Include="src\KnightBruteForce\KnightBruteForce.h" />
   </ItemGroup>
